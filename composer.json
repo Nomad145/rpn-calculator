@@ -1,0 +1,17 @@
+{
+    "name": "nomad145/rpn-calculator",
+    "description": "A Reverse Polish Notation calculator.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Michael Phillips",
+            "email": "michaeljoelphillips@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^4.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    }
+}

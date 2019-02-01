@@ -3,7 +3,7 @@
 namespace Test\ValueObject;
 
 use PHPUnit\Framework\TestCase;
-use App\ValueObject\Expression;
+use App\Expression;
 use App\Exception\ExpressionException;
 use App\Operators\Addition;
 

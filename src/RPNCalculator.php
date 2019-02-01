@@ -3,19 +3,23 @@
 namespace App;
 
 use App\Exception\InsufficientOperandsException;
-use App\Operators\Addition;
 use App\Operators\OperatorInterface;
-use UnexpectedValueException;
-use App\ValueObject\Expression;
 
 /**
+ * A Reverse Polish Notation Calculator.
+ *
+ * Pushes operands onto a stack for evaluation.
+ *
  * @author Michael Phillips <michael.phillips@realpage.com>
  */
-class RPNCalculator
+class RPNCalculator implements CalculatorInterface
 {
     /** @var array */
     private $stack = [];
 
+    /**
+     * {@inheritdoc}
+     */
     public function evaluate(Expression $expression): float
     {
         foreach ($expression->toArray() as $item) {
@@ -32,7 +36,7 @@ class RPNCalculator
     }
 
     /**
-     * Evaluate an expression on the stack with the given operator.
+     * Evaluate an expression with two operands from the stack.
      *
      * @param OperatorInterface $operator
      *
@@ -50,18 +54,6 @@ class RPNCalculator
     }
 
     /**
-     * Push an operand onto the stack.
-     *
-     * @param float $operand
-     */
-    private function push(float $operand): float
-    {
-        array_unshift($this->stack, $operand);
-
-        return $operand;
-    }
-
-    /**
      * Pop two values from the stack for evaluation.
      *
      * @throws InsufficientOperandsException
@@ -75,5 +67,19 @@ class RPNCalculator
         }
 
         return array_splice($this->stack, 0, 2);
+    }
+
+    /**
+     * Push an operand onto the stack.
+     *
+     * @param float $operand
+     *
+     * @return float
+     */
+    private function push(float $operand): float
+    {
+        array_unshift($this->stack, $operand);
+
+        return $operand;
     }
 }

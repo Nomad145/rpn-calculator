@@ -2,12 +2,12 @@
 
 namespace App\Factory;
 
-use App\Operators\OperatorInterface;
-use App\Operators\Modulo;
-use App\Operators\Division;
-use App\Operators\Multiplication;
-use App\Operators\Subtraction;
 use App\Operators\Addition;
+use App\Operators\Division;
+use App\Operators\Modulo;
+use App\Operators\Multiplication;
+use App\Operators\OperatorInterface;
+use App\Operators\Subtraction;
 
 /**
  * A static factory for creating various operators.
@@ -16,6 +16,11 @@ use App\Operators\Addition;
  */
 class OperatorFactory implements OperatorFactoryInterface
 {
+    /**
+     * A map of supported operators and their implementations.
+     *
+     * @var array
+     */
     private const OPERATORS = [
         '+' => Addition::class,
         '-' => Subtraction::class,
@@ -31,7 +36,7 @@ class OperatorFactory implements OperatorFactoryInterface
     {
         $operatorClass = self::OPERATORS[$symbol];
 
-        return new $operatorClass;
+        return new $operatorClass();
     }
 
     /**

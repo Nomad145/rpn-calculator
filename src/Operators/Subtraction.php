@@ -3,7 +3,7 @@
 namespace App\Operators;
 
 /**
- * The Subtraction operator.
+ * The subtraction operator.
  *
  * @author Michael Phillips <michael.phillips@realpage.com>
  */

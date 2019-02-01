@@ -6,7 +6,7 @@ use App\Exception\InsufficientOperandsException;
 use App\Operators\Addition;
 use App\RPNCalculator;
 use PHPUnit\Framework\TestCase;
-use App\ValueObject\Expression;
+use App\Expression;
 
 /**
  * @author Michael Phillips <michael.phillips@realpage.com>

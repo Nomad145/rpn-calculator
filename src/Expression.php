@@ -1,34 +1,23 @@
 <?php
 
-namespace App\ValueObject;
+namespace App;
 
 use App\Exception\ExpressionException;
 use App\Factory\OperatorFactory;
+use App\Operators\OperatorInterface;
 
 /**
- * A Value Object representing a whole, or a part of an RPN expression.
+ * A Value Object representing a whole, or a part of an expression.
  *
  * @author Michael Phillips <michael.phillips@realpage.com>
  */
 class Expression
 {
-    /**
-     * A list of valid operators.
-     *
-     * Note: Enumerating operators violates the Open Close Principle, but
-     * allows for convenient validation in {@see self::validateExpressionParts}.
-     * New Operators implementing {@see App\Operators\OpratorInterface} will
-     * need to be added to this list to be considered valid by this Value Object.
-     *
-     * @var array
-     */
-    private const VALID_OPERATORS = ['+', '-', '*', '/', '%'];
-
-    /** @var array */
+    /** @var array[string|OperatorInterface] */
     private $expressionParts;
 
     /**
-     * Create an expression from its string representation.
+     * A named constructor for creating an Expression from string input.
      *
      * @param string $input
      *
@@ -46,8 +35,7 @@ class Expression
             }
         );
 
-        // `array_filter` preserves numeric keys, so we call `array_values` to
-        // reorder them.
+        // array_filter preserves keys, so reorder the numeric indexes.
         $expressionParts = array_values($expressionParts);
 
         return new self($expressionParts);
@@ -65,7 +53,7 @@ class Expression
      */
     private function __construct(array $expressionParts)
     {
-        $this->validateExpressionParts($expressionParts);
+        $this->validateExpression($expressionParts);
         $expressionParts = $this->convertOperators($expressionParts);
 
         $this->expressionParts = $expressionParts;
@@ -79,24 +67,22 @@ class Expression
      * @throws ExpressionException If the expression is empty
      *                             If the expression contains invalid values
      */
-    private function validateExpressionParts(array $expressionParts): void
+    private function validateExpression(array $expressionParts): void
     {
-        if (count($expressionParts) === 0) {
+        if (0 === count($expressionParts)) {
             throw ExpressionException::forEmptyExpression();
         }
 
-        array_walk(
-            $expressionParts,
-            function (string $item) use ($expressionParts) {
-                if (!is_numeric($item) && !OperatorFactory::supports($item)) {
-                    throw ExpressionException::forInvalidExpression($expressionParts);
-                }
+        foreach ($expressionParts as $item) {
+            if (!is_numeric($item) && !OperatorFactory::supports($item)) {
+                throw ExpressionException::forInvalidExpression($expressionParts);
             }
-        );
+        }
     }
 
     /**
-     * Convert supported operators to their appropriate instances.
+     * Replace operator symbols in an expression with their Operator
+     * implementations.
      *
      * Delegates operator creation to {@see App\Factory\OperatorFactory}.
      *
@@ -121,9 +107,7 @@ class Expression
     /**
      * Get the expression as an array.
      *
-     *   ['2.0', '3.0', '+']
-     *
-     * @return string[]
+     * @return string[]|OperatorInterface[]
      */
     public function toArray(): array
     {

@@ -3,6 +3,8 @@
 namespace App\Operators;
 
 /**
+ * The modulo operator.
+ *
  * @author Michael Phillips <michael.phillips@realpage.com>
  */
 class Modulo implements OperatorInterface

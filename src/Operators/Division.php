@@ -3,6 +3,8 @@
 namespace App\Operators;
 
 /**
+ * The division operator.
+ *
  * @author Michael Phillips <michael.phillips@realpage.com>
  */
 class Division implements OperatorInterface

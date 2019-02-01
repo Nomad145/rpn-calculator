@@ -5,8 +5,7 @@ namespace App\Exception;
 use Exception;
 
 /**
- * Thrown if an expression is given operands or operators that are known to be
- * invalid during runtime.
+ * An exception thrown during Expression validation.
  *
  * @author Michael Phillips <michael.phillips@realpage.com>
  */
@@ -17,10 +16,10 @@ class ExpressionException extends Exception
     private const EMPTY_EXPRESSION_MESSAGE = 'Expression cannot be empty.';
 
     /**
-     * An exception case occurring when the given expression contains values
+     * An exceptional case occurring when the given expression contains values
      * that are known to be invalid.
      *
-     * Values include non-numeric oprands and invalid operators.
+     * Invalid values include non-numeric oprands and unsupported operators.
      *
      * @param array $expressionParts
      *

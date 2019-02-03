@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Expression;
+use App\Exception\CalculatorException;
 
 /**
  * Defines behavior of Calculator Implementations.
@@ -17,6 +17,8 @@ interface CalculatorInterface
      * @param Expression $expression
      *
      * @return float
+     *
+     * @throws CalculatorException
      */
     public function evaluate(Expression $expression): float;
 }

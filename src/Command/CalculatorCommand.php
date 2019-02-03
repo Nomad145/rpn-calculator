@@ -3,8 +3,8 @@
 namespace App\Command;
 
 use App\CalculatorInterface;
+use App\Exception\CalculatorException;
 use App\Exception\ExpressionException;
-use App\Exception\InsufficientOperandsException;
 use App\Expression;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -134,7 +134,7 @@ class CalculatorCommand extends Command
             $output->writeln($result);
 
             return 0;
-        } catch (ExpressionException | InsufficientOperandsException $e) {
+        } catch (ExpressionException | CalculatorException $e) {
             $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
 
             return 1;

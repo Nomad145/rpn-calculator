@@ -27,7 +27,7 @@ class ExpressionException extends Exception
      */
     public static function forInvalidExpression(array $expressionParts): self
     {
-        $message = sprintf(self::INVALID_EXPRESSION_MESSAGE, implode(',', $expressionParts));
+        $message = sprintf(self::INVALID_EXPRESSION_MESSAGE, implode(' ', $expressionParts));
 
         return new self($message);
     }

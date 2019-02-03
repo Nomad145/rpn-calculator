@@ -12,7 +12,9 @@ interface OperatorFactoryInterface
     /**
      * Create an Operator from its symbol.
      *
-     *   $factory->makeFromSymbol('+');
+     * ```
+     * OperatorFactory::makeFromSymbol('+');
+     * ```
      *
      * @param string $symbol
      *
@@ -23,7 +25,9 @@ interface OperatorFactoryInterface
     /**
      * Get a list of operators supported by this factory.
      *
-     *   ['+', '-', '/']
+     * ```
+     * ['+', '-', '/']
+     * ```
      *
      * @return array
      */

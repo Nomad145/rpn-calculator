@@ -124,10 +124,10 @@ class CalculatorCommand extends Command
      * @param string          $input  An expression as input
      * @param OutputInterface $output
      *
-     * @return int 0 if the evaluation was successful
-     *             1 if the evaluate encountered errors
+     * @return int 0 If evaluation was successful
+     *             1 If errors occurred
      */
-    private function evaluate(string $input, OutputInterface $output)
+    protected function evaluate(string $input, OutputInterface $output)
     {
         try {
             $result = $this->calculator->evaluate(Expression::fromInput($input));
@@ -146,7 +146,7 @@ class CalculatorCommand extends Command
      *
      * @param InputInterface $input
      *
-     * @return resource The input stream
+     * @return resource
      */
     private function getInputStream(InputInterface $input)
     {

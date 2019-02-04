@@ -56,9 +56,7 @@ class CalculatorCommand extends Command
         $expression = $this->getExpressionFromInput($input);
 
         if (null !== $expression) {
-            $exitCode = $this->evaluate($expression, $output);
-
-            return $exitCode;
+            return $this->evaluate($expression, $output);
         }
 
         $this->startInteractiveInput($input, $output);
@@ -69,8 +67,8 @@ class CalculatorCommand extends Command
     /**
      * Get the expression from user input.
      *
-     * Resolves input from either the command argument or from STDIN.  If no
-     * input given, null is returned.
+     * Resolves input from either the command argument or from a STDIN pipe.
+     * If no input given, null is returned.
      *
      * @param InputInterface $input
      *
@@ -79,11 +77,19 @@ class CalculatorCommand extends Command
     private function getExpressionFromInput(InputInterface $input): ?string
     {
         if (null !== $input->getArgument('expression')) {
-            return $input->getFirstArgument();
+            $argument = $input->getArgument('expression');
+
+            if (is_array($argument)) {
+                return $argument[0];
+            }
+
+            return $argument;
         }
 
-        if (0 === ftell(STDIN)) {
-            $input = $this->readUserInput(STDIN);
+        $stream = $this->getInputStream($input);
+
+        if (0 === ftell($stream)) {
+            $input = $this->readUserInput($stream);
 
             if ($input) {
                 return $input;

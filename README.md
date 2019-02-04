@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.com/Nomad145/rpn-calculator.svg?branch=master)](https://travis-ci.com/Nomad145/rpn-calculator)
 [![codecov](https://codecov.io/gh/Nomad145/rpn-calculator/branch/master/graph/badge.svg)](https://codecov.io/gh/Nomad145/rpn-calculator)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg)](https://github.com/phpstan/phpstan)
+[![PHPCS](https://img.shields.io/badge/PHPCS-enabled-brightgreen.svg)](https://github.com/squizlabs/PHP_CodeSniffer)
 
 # Reverse Polish Notation Calculator
 

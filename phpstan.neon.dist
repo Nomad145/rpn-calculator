@@ -5,3 +5,4 @@ includes:
 parameters:
     ignoreErrors:
         - '#Variable \$result might not be defined.#'
+        - '#Method App\Command\CalculatorCommand::getExpressionFromInput() should return string|null but returns array<string>|string.#'

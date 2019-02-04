@@ -1,0 +1,6 @@
+includes:
+    - ./vendor/phpstan/phpstan/conf/config.levelmax.neon
+
+parameters:
+    ignoreErrors:
+        - '#Variable \$result might not be defined.#'

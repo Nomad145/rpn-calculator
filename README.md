@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/Nomad145/rpn-calculator.svg?branch=master)](https://travis-ci.com/Nomad145/rpn-calculator)
+[![codecov](https://codecov.io/gh/Nomad145/rpn-calculator/branch/master/graph/badge.svg)](https://codecov.io/gh/Nomad145/rpn-calculator)
+
 # Reverse Polish Notation Calculator
 
 This project is an implementation of a Reverse Polish Notation Calculator.

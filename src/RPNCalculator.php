@@ -29,7 +29,7 @@ class RPNCalculator implements CalculatorInterface
                 continue;
             }
 
-            $result = $this->push($item);
+            $result = $this->push((float) $item);
         }
 
         return $result;

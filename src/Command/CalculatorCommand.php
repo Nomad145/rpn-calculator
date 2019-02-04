@@ -79,11 +79,15 @@ class CalculatorCommand extends Command
     private function getExpressionFromInput(InputInterface $input): ?string
     {
         if (null !== $input->getArgument('expression')) {
-            return $input->getArgument('expression');
+            return $input->getFirstArgument();
         }
 
         if (0 === ftell(STDIN)) {
-            return $this->readUserInput(STDIN);
+            $input = $this->readUserInput(STDIN);
+
+            if ($input) {
+                return $input;
+            }
         }
 
         return null;
@@ -131,7 +135,7 @@ class CalculatorCommand extends Command
     {
         try {
             $result = $this->calculator->evaluate(Expression::fromInput($input));
-            $output->writeln($result);
+            $output->writeln((string) $result);
 
             return 0;
         } catch (ExpressionException | CalculatorException $e) {
@@ -168,7 +172,7 @@ class CalculatorCommand extends Command
      *
      * @param resource $stream
      *
-     * @return bool|string
+     * @return false|string
      */
     private function readUserInput($stream)
     {

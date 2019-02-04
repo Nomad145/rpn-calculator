@@ -1,11 +1,11 @@
 <?php
 
-namespace Test\ValueObject;
+namespace Tests;
 
-use PHPUnit\Framework\TestCase;
-use App\Expression;
 use App\Exception\ExpressionException;
+use App\Expression;
 use App\Operators\Addition;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Michael Phillips <michael.phillips@realpage.com>

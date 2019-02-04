@@ -77,13 +77,7 @@ class CalculatorCommand extends Command
     private function getExpressionFromInput(InputInterface $input): ?string
     {
         if (null !== $input->getArgument('expression')) {
-            $argument = $input->getArgument('expression');
-
-            if (is_array($argument)) {
-                return $argument[0];
-            }
-
-            return $argument;
+            return $input->getArgument('expression');
         }
 
         $stream = $this->getInputStream($input);

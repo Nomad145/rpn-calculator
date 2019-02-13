@@ -17,14 +17,25 @@ class RPNCalculator implements CalculatorInterface
     /** @var array */
     private $stack = [];
 
+    /** @var OperatorInterface[] */
+    private $operators;
+
+    /**
+     * @param OperatorInterface ...$operators
+     */
+    public function __construct(OperatorInterface ...$operators)
+    {
+        $this->operators = $operators;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function evaluate(Expression $expression): float
     {
         foreach ($expression->toArray() as $item) {
-            if ($item instanceof OperatorInterface) {
-                $result = $this->invokeOperator($item);
+            if ($this->isOperator($item)) {
+                $result = $this->invokeOperator($this->operators[$item]);
 
                 continue;
             }
@@ -33,6 +44,17 @@ class RPNCalculator implements CalculatorInterface
         }
 
         return $result;
+    }
+
+    private function isOperator(string $item): bool
+    {
+        foreach ($this->operators as $operator) {
+            if ($operator->supports($item)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

@@ -18,4 +18,13 @@ interface OperatorInterface
      * @return float
      */
     public function __invoke(float $operandA, float $operandB): float;
+
+    /**
+     * Determin if the operator supports the $symbol.
+     *
+     * @param string $symbol
+     *
+     * @return bool
+     */
+    public function supports(string $symbol): bool;
 }
